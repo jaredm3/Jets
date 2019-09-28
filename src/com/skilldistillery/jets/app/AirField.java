@@ -4,15 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AirField {
-	
-	public List<Jet> jets = new ArrayList<>();    //change to private
-	
+
+	private List<Jet> jets = new ArrayList<>(); // home for Jets #User Story2
+
 	public AirField() {
-		 
+
 	}
-	
+
 	public void addJets(Jet j) {
 		jets.add(j);
+	}
+
+	public void removeJets(Jet j) {
+		jets.remove(j);
 	}
 
 	@Override
@@ -23,39 +27,39 @@ public class AirField {
 		builder.append("]");
 		return builder.toString();
 	}
-	
+
 	public void launchJets() {
 		for (Jet j : jets) {
 			j.fly();
 		}
 	}
-	
+
 	public Jet findFastest() {
 		double topSpeed = 0;
 		Jet fastJet = null;
 		for (Jet j : jets) {
-			if (j.getSpeed()>topSpeed) {
+			if (j.getSpeed() > topSpeed) {
 				topSpeed = j.getSpeed();
 				fastJet = j;
-				
+
 			}
 		}
 		return fastJet;
 	}
-	
+
 	public Jet findLongestRange() {
 		int topRange = 0;
 		Jet topRangeJet = null;
 		for (Jet j : jets) {
-			if (j.getRange()>topRange) {
+			if (j.getRange() > topRange) {
 				topRange = j.getRange();
 				topRangeJet = j;
-				
+
 			}
 		}
 		return topRangeJet;
 	}
-	
+
 	public void loadAllCargo() {
 		for (Jet j : jets) {
 			if (j instanceof CargoCarrier) {
@@ -63,7 +67,7 @@ public class AirField {
 			}
 		}
 	}
-	
+
 	public void dogfight() {
 		for (Jet j : jets) {
 			if (j instanceof CombatReady) {
@@ -71,5 +75,5 @@ public class AirField {
 			}
 		}
 	}
-	
+
 }

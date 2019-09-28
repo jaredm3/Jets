@@ -10,9 +10,10 @@ import java.util.Scanner;
 
 public class JetsApplication {
 
-	private AirField airField = new AirField();
+	private AirField airField = new AirField(); // created to use AirField class
 	private Scanner scanner = new Scanner(System.in);
 
+	// NoArg Constructor
 	public JetsApplication() {
 
 	}
@@ -23,15 +24,13 @@ public class JetsApplication {
 
 		List<Jet> jetList = jetApp.launch(fileName);
 
-		//System.out.println(jetList);
-
 		jetApp.displayUserMenu(jetList);
 
 	}
 
-	public List<Jet> launch(String fileName) {
+	public List<Jet> launch(String fileName) { // .txt file to List<Jet>
 		List<Jet> result = new ArrayList<>();
-		AirField a = new AirField();
+		// AirField a = new AirField();
 
 		try {
 			FileReader fr = new FileReader(fileName);
@@ -46,32 +45,21 @@ public class JetsApplication {
 				int range = Integer.parseInt(jetRecords[3]);
 				long price = Long.parseLong(jetRecords[4]);
 
-//				System.out.println("0 is " + jetRecords[0]);
-//				System.out.println("1 is " + jetRecords[1]);
-//				System.out.println("2 is " + jetRecords[2]);
-//				System.out.println("3 is " + jetRecords[3]);
-//				System.out.println("4 is " + jetRecords[4]);
-
 				if (type.equals("CargoPlane")) {
 					Jet j = new CargoPlane(name, speed, range, price);
-					result.add(j);
-					airField.addJets(j);
-					// a.addJets(j);
+					result.add(j);// added to local List<Jet>
+					airField.addJets(j);// added to airField List<Jet> #UserStory3
 				} else if (type.equals("FighterJet")) {
 					Jet j = new FighterJet(name, speed, range, price);
 					result.add(j);
 					airField.addJets(j);
-					// a.addJets(j);
 				} else {
 					Jet j = new VanillaCessna(name, speed, range, price);
 					result.add(j);
 					airField.addJets(j);
-					// a.addJets(j);
 				}
 
 			}
-
-			// System.out.println(a); print check
 			br.close();
 		} catch (FileNotFoundException e) {
 			System.err.println("Invalid filename: " + e.getMessage());
@@ -85,7 +73,6 @@ public class JetsApplication {
 		boolean run = true;
 		while (run) {
 			System.out.println("***** Welcome to the HANGAR *****");
-			System.out.println();
 			System.out.println("Please choose a number: ");
 			System.out.println("1) List Fleet");
 			System.out.println("2) Fly all Jets");
@@ -127,8 +114,8 @@ public class JetsApplication {
 				System.out.println("CYA!");
 				run = false;
 				break;
-
 			default:
+				System.out.println("Enter a number 0-9: \n");
 				break;
 			}
 		}
@@ -139,27 +126,32 @@ public class JetsApplication {
 		for (Jet j : jetList) {
 			System.out.println(j);
 		}
+		System.out.println();
 	}
 
 	public void flyJets() {
 		airField.launchJets();
-		// System.out.println(airField.jets);
+		System.out.println();
 	}
 
 	public void viewFastest() {
 		System.out.println(airField.findFastest());
+		System.out.println();
 	}
 
 	public void viewLongestRange() {
 		System.out.println(airField.findLongestRange());
+		System.out.println();
 	}
 
 	public void loadAllCargo() {
 		airField.loadAllCargo();
+		System.out.println();
 	}
 
 	public void dogfight() {
 		airField.dogfight();
+		System.out.println();
 	}
 
 	public void addToFleet(List<Jet> jetList) {
@@ -175,7 +167,8 @@ public class JetsApplication {
 
 		Jet newJet = new VanillaCessna(modelInput, nameInput, rangeInput, priceInput);
 		jetList.add(newJet);
-		
+		airField.addJets(newJet);
+
 	}
 
 	public void removeFromFleet(List<Jet> jetList) {
@@ -193,6 +186,7 @@ public class JetsApplication {
 			return;
 		}
 		jetList.remove(copyRemove);
+		airField.removeJets(copyRemove);
 	}
 
 }

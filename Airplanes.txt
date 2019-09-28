@@ -1,4 +1,4 @@
-CargoPlane, Moose, 550, 2200, 1000000
+CargoPlane, Moose, 155, 600, 100000
 FighterJet, Tycoon, 1600, 600, 4000000
 VanillaCessna, SkyHawk, 155, 900, 35000
 CargoPlane, Antov, 500, 3200, 2000000
