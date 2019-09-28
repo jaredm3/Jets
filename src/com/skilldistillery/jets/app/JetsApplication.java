@@ -22,13 +22,15 @@ public class JetsApplication {
 		JetsApplication jetApp = new JetsApplication();
 		String fileName = "Airplanes.txt";
 
-		List<Jet> jetList = jetApp.launch(fileName);
+		jetApp.populatePilots();// adds pilots to List<String> in AirField
+
+		List<Jet> jetList = jetApp.launch(fileName);// .txt file to List<Jet>
 
 		jetApp.displayUserMenu(jetList);
 
 	}
 
-	public List<Jet> launch(String fileName) { // .txt file to List<Jet>
+	public List<Jet> launch(String fileName) {
 		List<Jet> result = new ArrayList<>();
 		// AirField a = new AirField();
 
@@ -49,6 +51,7 @@ public class JetsApplication {
 					Jet j = new CargoPlane(name, speed, range, price);
 					result.add(j);// added to local List<Jet>
 					airField.addJets(j);// added to airField List<Jet> #UserStory3
+
 				} else if (type.equals("FighterJet")) {
 					Jet j = new FighterJet(name, speed, range, price);
 					result.add(j);
@@ -69,6 +72,10 @@ public class JetsApplication {
 		return result;
 	}
 
+	public void populatePilots() {
+		airField.populatePilots();
+	}
+
 	public void displayUserMenu(List<Jet> jetList) {
 		boolean run = true;
 		while (run) {
@@ -83,6 +90,9 @@ public class JetsApplication {
 			System.out.println("7) Add a jet to the fleet");
 			System.out.println("8) Remove a jet from the fleet");
 			System.out.println("9) Quit");
+			System.out.println("------- Beta Implementations -------");
+			System.out.println("10) Randomly Assign Pilots to Fleet");
+			System.out.println("11) Launch Single Jet");
 			int userChoice = scanner.nextInt();
 
 			switch (userChoice) {
@@ -113,6 +123,14 @@ public class JetsApplication {
 			case 9:// quit
 				System.out.println("CYA!");
 				run = false;
+				break;
+			case 10:
+				assignPilotsRandom(jetList);
+				break;
+			case 11:
+				System.out.println("Which jet would you like to fly? (enter model)");
+				String userFly = scanner.next();
+				launchSingleJet(userFly);
 				break;
 			default:
 				System.out.println("Enter a number 0-9: \n");
@@ -156,6 +174,8 @@ public class JetsApplication {
 
 	public void addToFleet(List<Jet> jetList) {
 
+		System.out.println("Enter the type of the jet (fighter-cargo-basic): ");
+		String jetType = scanner.next();
 		System.out.println("Enter the model of the jet: ");
 		String modelInput = scanner.next();
 		System.out.println("Enter the speed of the jet: ");
@@ -165,9 +185,19 @@ public class JetsApplication {
 		System.out.println("Enter the price of the jet: ");
 		long priceInput = scanner.nextLong();
 
-		Jet newJet = new VanillaCessna(modelInput, nameInput, rangeInput, priceInput);
-		jetList.add(newJet);
-		airField.addJets(newJet);
+		if (jetType.toLowerCase().equals("fighter")) {
+			Jet newTypeJet = new FighterJet(modelInput, nameInput, rangeInput, priceInput);
+			jetList.add(newTypeJet);
+			airField.addJets(newTypeJet);
+		} else if (jetType.toLowerCase().equals("cargo")) {
+			Jet newTypeJet = new CargoPlane(modelInput, nameInput, rangeInput, priceInput);
+			jetList.add(newTypeJet);
+			airField.addJets(newTypeJet);
+		} else {
+			Jet newJet = new VanillaCessna(modelInput, nameInput, rangeInput, priceInput);
+			jetList.add(newJet);
+			airField.addJets(newJet);
+		}
 
 	}
 
@@ -187,6 +217,16 @@ public class JetsApplication {
 		}
 		jetList.remove(copyRemove);
 		airField.removeJets(copyRemove);
+	}
+
+	public void assignPilotsRandom(List<Jet> jetList) {
+		System.out.println();
+		airField.assignPilotsRandom();
+		System.out.println();
+	}
+	
+	public void launchSingleJet(String userInput) {
+		airField.launchJet(userInput);
 	}
 
 }
