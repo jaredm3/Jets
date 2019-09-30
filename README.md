@@ -33,11 +33,11 @@
 
 ### Technologies/Topics Applied
 
-  1) Object Oriented Programming
+  1) Object Oriented Programming - 
 Inheritance and Abstraction methodologies were put to use during this project. There is an Abstract Jet SuperClass that other subclasses extend. These subclasses (FighterJet, CargoJet, VanillaCessna) also implement certain Interfaces.  
 
-  2) Eclipse Debugging
+  2) Eclipse Debugging - 
 Using the Eclipse Debugging was a great help while writing this program. I was having an issue with two Lists that were tied to the same 'variable' or spot on the 'Heap'. When I used the debugging feature, I was able to see that while it was going through a loop and editing one List, the copy of the List was also being edited. 
 
-  3) Interfaces
+  3) Interfaces - 
 Interfaces were utilized to define an Objects behavior. For example, only the Cargo Jets can 'Load Cargo' and only Fighter Jets can 'Dogfight'. 
