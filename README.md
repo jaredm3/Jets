@@ -11,7 +11,7 @@
   The user is then confronted with this menu:
 
   			------------------------------------
-  		***** Welcome to the HANGAR ******
+  			***** Welcome to the HANGAR ******
 			Please choose a number:
 			1) List Fleet
 			2) Fly all Jets
